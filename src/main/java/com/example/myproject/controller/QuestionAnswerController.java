@@ -56,4 +56,11 @@ public class QuestionAnswerController {
         questionAnswerService.deleteQuestionAnswerById(id);
         return ResponseEntity.noContent().build();
     }
+    
+    // CORS configuration
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> handleOptions() {
+        return ResponseEntity.ok().build();
+    }
 }

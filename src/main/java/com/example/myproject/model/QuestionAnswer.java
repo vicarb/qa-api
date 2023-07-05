@@ -10,14 +10,16 @@ public class QuestionAnswer {
 
     private String question;
     private String answer;
+    private String category;
 
     public QuestionAnswer() {
         // Default constructor
     }
 
-    public QuestionAnswer(String question, String answer) {
+    public QuestionAnswer(String question, String answer, String category) {
         this.question = question;
         this.answer = answer;
+        this.category = category;
     }
 
     public String getId() {
@@ -42,5 +44,13 @@ public class QuestionAnswer {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
