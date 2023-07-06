@@ -21,13 +21,15 @@ resource "google_compute_instance" "default" {
   metadata_startup_script = <<-EOF
     #!/bin/bash
     apt-get update
-    apt-get install -y docker.io
+    sudo apt-get install -y docker.io
 
-    usermod -aG docker $USER
+    sudo usermod -aG docker $USER
 
-    systemctl enable docker
-    systemctl start docker
+    sudo systemctl enable docker
+    sudo systemctl start docker
 
     docker run -d -p 8082:8081 webcl/qa-api:latest
   EOF
+
 }
+
