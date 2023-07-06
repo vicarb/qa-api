@@ -10,7 +10,7 @@ resource "google_cloud_run_service" "default" {
   template {
     spec {
       containers {
-        image = "webcl/qa-api:latest"
+        image = "gcr.io/terra-project-391200/gqa-api:latest"
       }
     }
   }

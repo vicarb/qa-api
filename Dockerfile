@@ -6,6 +6,6 @@ COPY . /app
 
 RUN gradle build
 
-EXPOSE 8081
+EXPOSE 8080
 
 CMD ["java", "-jar", "./build/libs/my-project-0.0.1-SNAPSHOT.jar"]
