@@ -3,33 +3,20 @@ provider "google" {
   region  = "us-central1"
 }
 
-resource "google_compute_instance" "default" {
-  name         = "terra-springboot-instance"
-  machine_type = "n1-standard-1"
-  zone         = "us-central1-a"
+resource "google_cloud_run_service" "default" {
+  name     = "my-cloudrun-service"
+  location = "us-central1"
 
-  boot_disk {
-    initialize_params {
-      image = "debian-10-buster-v20230615"
+  template {
+    spec {
+      containers {
+        image = "webcl/qa-api:latest"
+      }
     }
   }
 
-  network_interface {
-    network = "default"
+  traffic {
+    percent         = 100
+    latest_revision = true
   }
-
-  metadata_startup_script = <<-EOF
-    #!/bin/bash
-    apt-get update
-    sudo apt-get install -y docker.io
-
-    sudo usermod -aG docker $USER
-
-    sudo systemctl enable docker
-    sudo systemctl start docker
-
-    docker run -d -p 8082:8081 webcl/qa-api:latest
-  EOF
-
 }
-
