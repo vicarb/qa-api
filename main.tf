@@ -1,16 +1,16 @@
 provider "google" {
-  project = "terra-project-391200"
-  region  = "us-central1"
+  project = "img-project-392101"
+  region  = "us-west1"
 }
 
 resource "google_cloud_run_service" "default" {
   name     = "my-cloudrun-service"
-  location = "us-central1"
+  location = "us-west1"
 
   template {
     spec {
       containers {
-        image = "gcr.io/terra-project-391200/gqa-api:latest"
+        image = "us-west1-docker.pkg.dev/img-project-392101/west-repo/qa-app:v1"
       }
     }
   }
@@ -20,3 +20,5 @@ resource "google_cloud_run_service" "default" {
     latest_revision = true
   }
 }
+
+
