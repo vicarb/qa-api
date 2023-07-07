@@ -10,7 +10,7 @@ resource "google_cloud_run_service" "default" {
   template {
     spec {
       containers {
-        image = "us-west1-docker.pkg.dev/img-project-392101/west-repo/qa-app:v1"
+        image = "us-west1-docker.pkg.dev/img-project-392101/west-repo/qa-app86:v1"
       }
     }
   }
@@ -21,4 +21,17 @@ resource "google_cloud_run_service" "default" {
   }
 }
 
+data "google_iam_policy" "noauth" {
+  binding {
+    role    = "roles/run.invoker"
+    members = ["allUsers"]
+  }
+}
 
+resource "google_cloud_run_service_iam_policy" "noauth" {
+  location    = google_cloud_run_service.default.location
+  project     = google_cloud_run_service.default.project
+  service     = google_cloud_run_service.default.name
+
+  policy_data = data.google_iam_policy.noauth.policy_data
+}
